@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Filme</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="bg-dark text-white p-3 text-center">
+        <h1 class="site-title">CINEMATIFLIX</h1>
+    </header>
+
+    <main class="container text-center mt-4">
+        <h2 id="titulo-filme"></h2>
+        <img id="imagem-filme" src="" alt="Imagem do filme" class="filme-img">
+        <p id="descricao-filme"></p>
+        <a href="index.html" class="btn btn-primary mt-3">Voltar</a>
+    </main>
+
+    <script>
+        // Capturar os parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const titulo = urlParams.get('titulo');
+        const imagem = urlParams.get('imagem');
+        const descricao = urlParams.get('descricao');
+
+        // Preencher os elementos da página
+        document.getElementById('titulo-filme').innerText = titulo;
+        document.getElementById('imagem-filme').src = imagem;
+        document.getElementById('descricao-filme').innerText = descricao;
+    </script>
+
+</body>
+
+</html>

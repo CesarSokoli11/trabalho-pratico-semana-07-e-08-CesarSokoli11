@@ -1,0 +1,185 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configuração geral */
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Fundo preto */
+    color: white;
+    min-height: 100vh;
+}
+
+/* Cabeçalho */
+header {
+    width: 100%;
+    background-color: #181818;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Ícone do menu hambúrguer */
+.menu-icon {
+    font-size: 26px;
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+/* Título do site */
+.site-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #E50914; /* Vermelho chamativo */
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 220px;
+    background-color: #222;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: 100vh;
+    left: -220px;
+    top: 60px;
+    transition: left 0.3s;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+/* Links do menu lateral */
+.menu-item {
+    font-size: 16px;
+    color: #ddd;
+    margin-bottom: 10px;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    transition: 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #E50914;
+    color: black;
+    border-radius: 5px;
+}
+
+/* Área principal */
+main {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Título do catálogo */
+.catalog-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+/* Grid de filmes */
+.filmes {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Estilo dos cards */
+.filme {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 100px;
+    text-align: center;
+}
+
+.filme img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Rodapé fixo */
+footer {
+    background-color: #222;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    margin-top: auto;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    .sidebar {
+        width: 200px;
+        height: 100vh; /* Deixar o menu ocupar toda a altura */
+    }
+
+    .catalog-title {
+        font-size: 20px; /* Em vez de sumir, só reduza o tamanho */
+    }
+
+    .filmes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filme {
+        width: 90%;
+        max-width: 300px;
+    }
+}
+
+/* 🔎 Estilização da barra de pesquisa */
+.search-bar {
+    display: none;
+    text-align: center;
+    margin: 10px auto;
+    width: 50%;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* 🟢 Mostrar a barra de pesquisa quando ativada */
+.search-bar.show {
+    display: block;
+}
+.search-bar {
+    display: none;
+    text-align: center;
+    margin: 10px auto;
+    width: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.search-bar.show {
+    display: block;
+    opacity: 1;
+}
