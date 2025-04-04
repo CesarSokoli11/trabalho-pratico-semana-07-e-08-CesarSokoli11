@@ -1,21 +1,21 @@
-/* Reset básico */
+/* RESET BÁSICO */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Configuração geral */
+/* CONFIGURAÇÃO GERAL */
 body {
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
-    background-color: #121212; /* Fundo preto */
+    background-color: #121212;
     color: white;
     min-height: 100vh;
 }
 
-/* Cabeçalho */
+/* CABEÇALHO */
 header {
     width: 100%;
     background-color: #181818;
@@ -25,23 +25,21 @@ header {
     align-items: center;
 }
 
-/* Ícone do menu hambúrguer */
 .menu-icon {
     font-size: 26px;
     cursor: pointer;
     padding-left: 20px;
 }
 
-/* Título do site */
 .site-title {
     font-size: 24px;
     font-weight: bold;
-    color: #E50914; /* Vermelho chamativo */
+    color: #E50914;
     text-decoration: none;
     padding-right: 20px;
 }
 
-/* Barra Lateral */
+/* SIDEBAR */
 .sidebar {
     width: 220px;
     background-color: #222;
@@ -52,14 +50,14 @@ header {
     height: 100vh;
     left: -220px;
     top: 60px;
-    transition: left 0.3s;
+    transition: left 0.3s ease-in-out;
 }
 
 .sidebar.active {
     left: 0;
 }
 
-/* Links do menu lateral */
+/* LINKS DO MENU */
 .menu-item {
     font-size: 16px;
     color: #ddd;
@@ -67,7 +65,7 @@ header {
     text-decoration: none;
     padding: 10px;
     display: block;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .menu-item:hover {
@@ -76,20 +74,19 @@ header {
     border-radius: 5px;
 }
 
-/* Área principal */
+/* ÁREA PRINCIPAL */
 main {
     flex: 1;
     padding: 20px;
     text-align: center;
 }
 
-/* Título do catálogo */
 .catalog-title {
     font-size: 26px;
     margin-bottom: 20px;
 }
 
-/* Grid de filmes */
+/* GRID DE FILMES */
 .filmes {
     display: flex;
     justify-content: center;
@@ -97,7 +94,6 @@ main {
     flex-wrap: wrap;
 }
 
-/* Estilo dos cards */
 .filme {
     background-color: #444;
     padding: 15px;
@@ -113,7 +109,7 @@ main {
     border-radius: 5px;
 }
 
-/* Rodapé fixo */
+/* RODAPÉ */
 footer {
     background-color: #222;
     padding: 10px;
@@ -124,7 +120,36 @@ footer {
     margin-top: auto;
 }
 
-/* RESPONSIVIDADE */
+/* 🔍 BARRA DE PESQUISA */
+.search-bar {
+    display: none;
+    text-align: center;
+    margin: 10px auto;
+    width: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Mostrar a barra de pesquisa ao ativar a classe .show */
+.search-bar.show {
+    display: block;
+    opacity: 1;
+}
+
+/* Classe utilitária para esconder elementos */
+.hidden {
+    display: none !important;
+}
+
+/* RESPONSIVO */
 @media (max-width: 768px) {
     .menu-icon {
         display: block;
@@ -132,11 +157,11 @@ footer {
 
     .sidebar {
         width: 200px;
-        height: 100vh; /* Deixar o menu ocupar toda a altura */
+        height: 100vh;
     }
 
     .catalog-title {
-        font-size: 20px; /* Em vez de sumir, só reduza o tamanho */
+        font-size: 20px;
     }
 
     .filmes {
@@ -149,37 +174,10 @@ footer {
         max-width: 300px;
     }
 }
-
-/* 🔎 Estilização da barra de pesquisa */
-.search-bar {
-    display: none;
-    text-align: center;
-    margin: 10px auto;
-    width: 50%;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* 🟢 Mostrar a barra de pesquisa quando ativada */
-.search-bar.show {
-    display: block;
-}
-.search-bar {
-    display: none;
-    text-align: center;
-    margin: 10px auto;
-    width: 50%;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.search-bar.show {
-    display: block;
-    opacity: 1;
-}
+cinematiflix/
+│
+├── img/
+│   ├── formula.jpg
+│   ├── capitaoamerica.webp
+│   ├── ultimoalvo.webp
+│   └── brancadeneve.jpeg

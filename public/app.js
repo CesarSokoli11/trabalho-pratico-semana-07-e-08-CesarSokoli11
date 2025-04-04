@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     carregarFilmes();
     atualizarFavoritos();
+    configurarBusca();
+
+    // Ativar menu hambúrguer
+    document.getElementById("menu-icon").addEventListener("click", function () {
+        document.getElementById("sidebar").classList.toggle("active");
+    });
 });
 
-// 🎬 Lista de filmes (simulando um JSON)
+// 🎬 Lista de filmes
 const filmes = [
     {
         titulo: "Brad Pitt F1",
@@ -29,23 +35,42 @@ const filmes = [
 
 // 🟢 Carregar filmes na página
 function carregarFilmes() {
-    let container = document.getElementById("filmes-container");
-    container.innerHTML = ""; 
+    const container = document.getElementById("filmes-container");
+    container.innerHTML = "";
 
     filmes.forEach(filme => {
-        let card = `
+        const card = `
             <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card bg-dark text-white" onclick="irParaDetalhes('${filme.titulo}', '${filme.imagem}', '${filme.descricao}')">
+                <div class="card bg-dark text-white filme-card">
                     <img src="${filme.imagem}" class="card-img-top" alt="${filme.titulo}">
                     <div class="card-body">
                         <h5 class="card-title">${filme.titulo}</h5>
                         <p class="card-text">${filme.descricao}</p>
-                        <button class="btn btn-warning" onclick="event.stopPropagation(); toggleFavorito('${filme.titulo}')">⭐ Favorito</button>
+                        <button class="btn btn-warning favoritar-btn" data-titulo="${filme.titulo}">⭐ Favorito</button>
                     </div>
                 </div>
             </div>
         `;
         container.innerHTML += card;
+    });
+
+    // Eventos para favoritos
+    document.querySelectorAll(".favoritar-btn").forEach(botao => {
+        botao.addEventListener("click", function (event) {
+            event.stopPropagation();
+            toggleFavorito(this.dataset.titulo);
+        });
+    });
+
+    // Eventos de clique nos cards
+    document.querySelectorAll(".filme-card").forEach(card => {
+        card.addEventListener("click", function () {
+            const titulo = this.querySelector(".card-title").textContent;
+            const filme = filmes.find(f => f.titulo === titulo);
+            if (filme) {
+                irParaDetalhes(filme.titulo, filme.imagem, filme.descricao);
+            }
+        });
     });
 }
 
@@ -55,23 +80,44 @@ function irParaDetalhes(titulo, imagem, descricao) {
     window.location.href = url;
 }
 
-// 🟡 Menu lateral responsivo
-document.getElementById("menu-icon").addEventListener("click", function () {
-    document.getElementById("sidebar").classList.toggle("active");
-});
+// 🔍 Busca de filmes
+function configurarBusca() {
+    const botaoBusca = document.getElementById("buscar-filmes");
+    const barraPesquisa = document.getElementById("search-bar");
+    const inputPesquisa = document.getElementById("search-input");
+    const listaResultados = document.getElementById("search-results");
 
-// 🔍 Filtro de busca
-document.getElementById("search").addEventListener("input", function () {
-    let searchValue = this.value.toLowerCase();
-    let filmes = document.querySelectorAll(".card");
+    botaoBusca.addEventListener("click", function (e) {
+        e.preventDefault();
+        barraPesquisa.classList.toggle("hidden");
+        barraPesquisa.classList.toggle("show");
 
-    filmes.forEach(filme => {
-        let title = filme.querySelector(".card-title").textContent.toLowerCase();
-        filme.style.display = title.includes(searchValue) ? "block" : "none";
+        inputPesquisa.value = "";
+        listaResultados.innerHTML = "";
+        inputPesquisa.focus();
     });
-});
 
-// ⭐ Adicionar/remover favoritos
+    inputPesquisa.addEventListener("input", function () {
+        const termo = inputPesquisa.value.toLowerCase();
+        listaResultados.innerHTML = "";
+
+        const filmesFiltrados = filmes.filter(filme =>
+            filme.titulo.toLowerCase().includes(termo)
+        );
+
+        filmesFiltrados.forEach(filme => {
+            const item = document.createElement("li");
+            item.textContent = filme.titulo;
+            item.addEventListener("click", function () {
+                inputPesquisa.value = filme.titulo;
+                listaResultados.innerHTML = "";
+            });
+            listaResultados.appendChild(item);
+        });
+    });
+}
+
+// ⭐ Favoritos
 function toggleFavorito(titulo) {
     let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
@@ -85,26 +131,30 @@ function toggleFavorito(titulo) {
     atualizarFavoritos();
 }
 
-// 🔄 Atualizar a lista de favoritos
+// 🔄 Atualizar favoritos
 function atualizarFavoritos() {
-    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    let lista = document.getElementById("favoritos-lista");
+    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+    const lista = document.getElementById("favoritos-lista");
 
     if (lista) {
-        lista.innerHTML = favoritos.length ? favoritos.map(filme => `<li>${filme}</li>`).join("") : "<li>Nenhum favorito</li>";
+        lista.innerHTML = favoritos.length
+            ? favoritos.map(filme => `<li>${filme}</li>`).join("")
+            : "<li>Nenhum favorito</li>";
     }
 }
 
-// 🎞 Efeito de "elevação" ao passar o mouse nos filmes
+// 🎞 Hover nos cards
 document.addEventListener("mouseover", function (event) {
-    if (event.target.closest(".card")) {
-        event.target.closest(".card").style.transform = "scale(1.05)";
-        event.target.closest(".card").style.transition = "0.3s";
+    const card = event.target.closest(".filme-card");
+    if (card) {
+        card.style.transform = "scale(1.05)";
+        card.style.transition = "0.3s";
     }
 });
 
 document.addEventListener("mouseout", function (event) {
-    if (event.target.closest(".card")) {
-        event.target.closest(".card").style.transform = "scale(1)";
+    const card = event.target.closest(".filme-card");
+    if (card) {
+        card.style.transform = "scale(1)";
     }
 });
