@@ -21,9 +21,9 @@ Leia o enunciado completo no Canvas.
 ## Print da versão responsiva com CSS puro
 
 <<  COLOQUE A IMAGEM AQUI >>
-![alt text](homepage.jpg.png)
 
+![alt text](prints/homepage.jpg.png)
 ## Print da versão responsiva com Bootstrap
 
 <<  COLOQUE A IMAGEM AQUI >>
-![alt text](detalhes-page.png)
+![alt text](prints/detalhes-page.png)
