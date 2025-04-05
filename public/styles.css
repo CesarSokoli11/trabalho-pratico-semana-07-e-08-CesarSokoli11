@@ -181,3 +181,10 @@ cinematiflix/
 │   ├── capitaoamerica.webp
 │   ├── ultimoalvo.webp
 │   └── brancadeneve.jpeg
+.filme-img {
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin: 20px auto;
+    display: block;
+}

@@ -158,3 +158,64 @@ document.addEventListener("mouseout", function (event) {
         card.style.transform = "scale(1)";
     }
 });
+function configurarBusca() {
+    const botaoBusca = document.getElementById("buscar-filmes");
+    const barraPesquisa = document.getElementById("search-bar");
+    const inputPesquisa = document.getElementById("search-input");
+    const listaResultados = document.getElementById("search-results");
+
+    // Exibir ou ocultar a barra de pesquisa ao clicar no botão
+    botaoBusca.addEventListener("click", function (e) {
+        e.preventDefault();
+        // Alterna a visibilidade da barra de pesquisa
+        barraPesquisa.classList.toggle("hidden");
+        barraPesquisa.classList.toggle("show");
+        inputPesquisa.value = "";
+        listaResultados.innerHTML = "";
+        inputPesquisa.focus();
+    });
+
+    // Filtrar os filmes enquanto o usuário digita e mostrar sugestões
+    inputPesquisa.addEventListener("input", function () {
+        const termo = inputPesquisa.value.toLowerCase();
+        listaResultados.innerHTML = "";
+
+        const filmesFiltrados = filmes.filter(filme =>
+            filme.titulo.toLowerCase().includes(termo)
+        );
+
+        filmesFiltrados.forEach(filme => {
+            const item = document.createElement("li");
+            item.textContent = filme.titulo;
+            item.classList.add("list-group-item");
+            // Ao clicar em uma sugestão, preenche o campo de busca
+            item.addEventListener("click", function () {
+                inputPesquisa.value = filme.titulo;
+                listaResultados.innerHTML = "";
+            });
+            listaResultados.appendChild(item);
+        });
+    });
+
+    // Ao pressionar ENTER, redirecionar para a página de detalhes do primeiro filme filtrado
+    inputPesquisa.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault(); // Evita submissão de formulário se houver
+            const termo = inputPesquisa.value.toLowerCase();
+            // Busca o primeiro filme cujo título contenha o termo pesquisado
+            const filmeEncontrado = filmes.find(filme =>
+                filme.titulo.toLowerCase().includes(termo)
+            );
+            if (filmeEncontrado) {
+                // Redireciona para a página de detalhes
+                irParaDetalhes(
+                    filmeEncontrado.titulo,
+                    filmeEncontrado.imagem,
+                    filmeEncontrado.descricao
+                );
+            } else {
+                alert("Filme não encontrado.");
+            }
+        }
+    });
+}
