@@ -13,15 +13,17 @@ Leia o enunciado completo no Canvas.
 
 ## Informações Gerais
 
-- Nome:
-- Matricula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome: Cesar Sokoli
+- Matricula: 887866
+- Proposta de projeto escolhida: Catálago de Filmes
+- Breve descrição sobre seu projeto: Este catálago de filmes, tem o objetivo de permitir que qualquer um tenha acesso a filmes variados organizados em cards visuais, com uma navegação fácil e uma barra de pesquisa inteligente que ajuda a encontrar rapidamente o que você procura.
 
 ## Print da versão responsiva com CSS puro
 
 <<  COLOQUE A IMAGEM AQUI >>
+![alt text](homepage.jpg.png)
 
 ## Print da versão responsiva com Bootstrap
 
 <<  COLOQUE A IMAGEM AQUI >>
+![alt text](detalhes-page.png)
